@@ -6,7 +6,7 @@
 </head>
 <body>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+  <p onclick="makeGreen()">×BREAK×DOWN×</p>
 
   <script>
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
@@ -18,28 +18,63 @@
     }
 
     // Regular
+    console.log('Hello');
 
     // Interpolated
+    console.log('Hello, I am a %s string!', '💩');
 
     // Styled
+    console.log('%c I am large text', 'font-size: 50px');
 
     // warning!
+    console.warn('HEEEELP');
 
     // Error :|
+    console.error('MAYDAY ');
 
     // Info
+    console.info('Did you know that... nothing!')
 
     // Testing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'You are missing an ouch!');
+    console.log(p.classList)
+    console.assert(1 === 2, "That's not right");
 
     // clearing
+    // console.clear();
 
     // Viewing DOM Elements
+    console.dir(p);
+    console.clear();
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`); // instead of console.group
+        console.log(`This is ${dog.name}.`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.log(`and is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count('Alex');
+    console.count('Alex');
+    console.count('Alex');
+    console.count('Alex');
+    console.count('Alex');
+    console.count('Alex');
 
     // timing
+    console.time('fetching data'); // can use performance.now from browser
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data')
+      });
+
+      // table
+      console.table(dogs);
 
   </script>
 </body>
