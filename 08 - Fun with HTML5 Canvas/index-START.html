@@ -18,23 +18,42 @@
   ctx.strokeStyle = '#BADA55';
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
+  ctx.lineWidth = 100;
+  ctx.globalCompositeOperation = 'multiply'; // like photoshop blend modes
 
  let isDrawing = false;
  // used to provide a relative framework for line positions
  let lastX = 0;
  let lastY = 0;
+ let hue = 0;
+ let direction = true;
 
  function draw(e){
    if(!isDrawing) return; // don't log details when not drawing
+   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; //100% saturation and 50% lightnes for HSL
    ctx.beginPath();
    // start from
    ctx.moveTo(lastX,lastY);
    // go to (end with)
    ctx.lineTo(e.offsetX,e.offsetY);
    ctx.stroke();
+  //  ctx.lineWidth = 100;
   //  lastX = e.offsetX;
   //  lastY = e.offsetY;
    [lastX, lastY] = [e.offsetX, e.offsetY]; //es6 method to assign values to variables equivalent to the above commented out assignments
+   hue++;
+   if (hue >= 360){
+     hue = 0;
+   }
+
+   if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1){
+     direction = !direction;
+   }
+   if (direction){
+     ctx.lineWidth++;
+   } else {
+     ctx.lineWidth-- ;
+   }
   }
 
  canvas.addEventListener('mousedown', (e) => {
