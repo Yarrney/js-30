@@ -55,11 +55,13 @@ body {
   display:flex;
   position: absolute;
   bottom:0;
+  left: 0; /* for when it expands fullscreen */
   width: 100%;
   transform: translateY(100%) translateY(-5px);
   transition:all .3s;
   flex-wrap:wrap;
   background:rgba(0,0,0,0.1);
+  z-index: 2147483648;
 }
 
 .player:hover .player__controls {
@@ -142,4 +144,9 @@ input[type=range]::-moz-range-thumb {
   border-radius: 50px;
   background: #ffc600;
   cursor: pointer;
+}
+
+/* Hide Shadow DOM Element in fullscreen video mode */
+::-webkit-media-controls-enclosure {
+  display: none !important;
 }
