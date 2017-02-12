@@ -26,10 +26,13 @@
   </div>
 
 <script>
+  // Constants
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+  //Functions
+  // create functin which logs item into the items array
   function addItem(e) {
     e.preventDefault(); //stops the page from reloading on submit (by default a form refresh or sends to server info)
     const text = (this.querySelector('[name=item]')).value; //this here is the form element, and then we look for another element with name 'item'
@@ -37,9 +40,22 @@
       text, // es6 shorthand - equivalent to text: text
       done: false
     }
-    console.log(item.text);
+    items.push(item)
+    this.reset(); //clears the input after the submit event
   }
 
+  // populate the list (on screen)
+  function populateList(plates = [], platesList) {
+    platesList.innerHTML = plates.map((plate, i) => {
+      return `
+        <li>
+          <label>${plate.text}</label>
+        </li>
+      `;
+    }).join('');  //use join as map returns and array, when we want only a string for innerHTML
+  }
+
+  // Listeners
   addItems.addEventListener('submit', addItem); // submit covers enter and click and so on...
 
 </script>
