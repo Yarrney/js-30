@@ -30,9 +30,20 @@
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+  function addItem(e) {
+    e.preventDefault(); //stops the page from reloading on submit (by default a form refresh or sends to server info)
+    const text = (this.querySelector('[name=item]')).value; //this here is the form element, and then we look for another element with name 'item'
+    const item = {
+      text, // es6 shorthand - equivalent to text: text
+      done: false
+    }
+    console.log(item.text);
+  }
+
+  addItems.addEventListener('submit', addItem); // submit covers enter and click and so on...
+
 </script>
 
 
 </body>
 </html>
-
